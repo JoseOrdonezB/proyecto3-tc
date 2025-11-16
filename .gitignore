@@ -1,0 +1,106 @@
+# --- Archivos de Python compilados / cachés ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Archivos de C/Extensiones compiladas ---
+*.so
+*.pyd
+*.dll
+*.dylib
+
+# --- Distribución / empaquetado ---
+build/
+dist/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+env.bak/
+venv.bak/
+.python-version
+
+# --- Configuración de herramientas de Python ---
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.hypothesis/
+.cache/
+.ruff_cache/
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Jupyter Notebooks ---
+.ipynb_checkpoints
+
+# --- Archivos temporales / OS ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Editores / IDE ---
+# VSCode
+.vscode/
+# PyCharm / IntelliJ
+.idea/
+*.iml
+# Otros
+*.swp
+*.swo
+
+# --- Entornos / variables de entorno ---
+.env
+.env.*
+*.env
+*.ini
+*.cfg
+*.local
+
+# --- Documentación generada ---
+_site/
+docs/_build/
+target/
+
+# --- Archivos de bases de datos locales / cachés app ---
+*.sqlite3
+*.db
+*.db-journal
+
+# --- Otros binarios / datos pesados opcionales ---
+*.out
+*.bin
+*.dat
+
+# --- Node (si usas frontend en el mismo repo) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
