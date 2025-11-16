@@ -1,27 +1,87 @@
 mt:
-  states: [q0, qf]
+  states: [q_start, q_Lfind, q_Rappend_a, q_Rappend_b, q_back_to_hash, q_acc]
   input_alphabet: [a, b]
-  tape_alphabet: [a, b, B]
-  initial_state: q0
-  accept_states: [qf]
+  tape_alphabet: [a, b, X, Y, "#", B]
+  initial_state: q_start
+  accept_states: [q_acc]
 
   transitions:
-    - state: q0
+    - state: q_start
       read: [a, b]
-      write: [b, a]
+      write: [a, b]
       move: R
-      next: q0
+      next: q_start
 
-    - state: q0
+    - state: q_start
+      read: [B]
+      write: ["#"]
+      move: L
+      next: q_Lfind
+
+    - state: q_Lfind
+      read: [X, Y]
+      write: [X, Y]
+      move: L
+      next: q_Lfind
+
+    - state: q_Lfind
+      read: [a]
+      write: [X]
+      move: R
+      next: q_Rappend_a
+
+    - state: q_Lfind
+      read: [b]
+      write: [Y]
+      move: R
+      next: q_Rappend_b
+
+    - state: q_Lfind
       read: [B]
       write: [B]
       move: R
-      next: qf
+      next: q_acc
+
+    - state: q_Rappend_a
+      read: [a, b, X, Y, "#"]
+      write: [a, b, X, Y, "#"]
+      move: R
+      next: q_Rappend_a
+
+    - state: q_Rappend_a
+      read: [B]
+      write: [a]
+      move: L
+      next: q_back_to_hash
+
+    - state: q_Rappend_b
+      read: [a, b, X, Y, "#"]
+      write: [a, b, X, Y, "#"]
+      move: R
+      next: q_Rappend_b
+
+    - state: q_Rappend_b
+      read: [B]
+      write: [b]
+      move: L
+      next: q_back_to_hash
+
+    - state: q_back_to_hash
+      read: [a, b, X, Y]
+      write: [a, b, X, Y]
+      move: L
+      next: q_back_to_hash
+
+    - state: q_back_to_hash
+      read: ["#"]
+      write: ["#"]
+      move: L
+      next: q_Lfind
 
 inputs:
   - "aaabb"
-  - "aaabbb"
-  - "ababab"
-  - "aaaabbbb"
-  - "bbaabb"
+  - "aababb"
   - "abbaba"
+  - "bbbaa"
+  - "ababab"
+  - "baabaa"

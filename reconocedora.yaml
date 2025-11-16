@@ -1,56 +1,116 @@
 mt:
-  states: [q0, q1, q2, q_rej, q_acc]
-  input_alphabet: [a, b]
-  tape_alphabet: [a, b, X, Y, B]
+  states: [q0, q1a, q1b, q1a_check, q1b_check, q2, q_check_right, q_rej, q_acc]
+  input_alphabet: [a, b, "#"]
+  tape_alphabet: [a, b, X, "#", B]
   initial_state: q0
   accept_states: [q_acc]
 
   transitions:
     - state: q0
-      read: [a]
+      read: [X]
       write: [X]
-      move: R
-      next: q1
-
-    - state: q0
-      read: [X, Y]
-      write: [X, Y]
       move: R
       next: q0
 
     - state: q0
+      read: [a]
+      write: [X]
+      move: R
+      next: q1a
+
+    - state: q0
+      read: [b]
+      write: [X]
+      move: R
+      next: q1b
+
+    - state: q0
+      read: ["#"]
+      write: ["#"]
+      move: R
+      next: q_check_right
+
+    - state: q0
+      read: [B]
+      write: [B]
+      move: R
+      next: q_rej
+
+    - state: q1a
+      read: [a, b, X]
+      write: [a, b, X]
+      move: R
+      next: q1a
+
+    - state: q1a
+      read: ["#"]
+      write: ["#"]
+      move: R
+      next: q1a_check
+
+    - state: q1a_check
+      read: [X]
+      write: [X]
+      move: R
+      next: q1a_check
+
+    - state: q1a_check
+      read: [a]
+      write: [X]
+      move: L
+      next: q2
+
+    - state: q1a_check
       read: [b]
       write: [b]
       move: R
       next: q_rej
 
-    - state: q0
+    - state: q1a_check
       read: [B]
       write: [B]
       move: R
-      next: q_acc
+      next: q_rej
 
-    - state: q1
-      read: [a, X, Y]
-      write: [a, X, Y]
+    - state: q1b
+      read: [a, b, X]
+      write: [a, b, X]
       move: R
-      next: q1
+      next: q1b
 
-    - state: q1
+    - state: q1b
+      read: ["#"]
+      write: ["#"]
+      move: R
+      next: q1b_check
+
+    - state: q1b_check
+      read: [X]
+      write: [X]
+      move: R
+      next: q1b_check
+
+    - state: q1b_check
       read: [b]
-      write: [Y]
+      write: [X]
       move: L
       next: q2
 
-    - state: q1
+    - state: q1b_check
+      read: [a]
+      write: [a]
+      move: R
+      next: q_rej
+
+    - state: q1b_check
       read: [B]
       write: [B]
       move: R
       next: q_rej
 
     - state: q2
-      read: [a, b, X, Y]
-      write: [a, b, X, Y]
+      read: [a, b, X, "#"]
+      write: [a, b, X, "#"]
       move: L
       next: q2
 
@@ -60,11 +120,29 @@ mt:
       move: R
       next: q0
 
-inputs:
-  - "aaabbb"
-  - "aaaabbbb"
-  - "aaaaabbbbb"
+    - state: q_check_right
+      read: [X]
+      write: [X]
+      move: R
+      next: q_check_right
 
-  - "aaabb"
-  - "aabbbb"
-  - "ababab"
+    - state: q_check_right
+      read: [a, b]
+      write: [a, b]
+      move: R
+      next: q_rej
+
+    - state: q_check_right
+      read: [B]
+      write: [B]
+      move: R
+      next: q_acc
+
+inputs:
+  - "ab#ab"
+  - "aab#aab"
+  - "bba#bba"
+
+  - "ab#ba"
+  - "aaa#aa"
+  - "ab#abbb"
