@@ -35,4 +35,4 @@ La máquina toma una cadena de entrada w sobre {a,b}, y construye en la misma ci
   - "baabaa"
 
 ## Vinculo al video explicativo:
-[Video Demostrativo](youtube.com)
+[Video Demostrativo](https://youtu.be/xdZQMcnFORc)

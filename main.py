@@ -1,6 +1,6 @@
-# main.py
-from config_loader import load_yaml_config
+from config_loader import load_yaml_config, print_yaml_config
 from turing_machine import TuringMachine
+
 
 print(" Elige que configuración cargar:")
 print(" 1. reconocedora")
